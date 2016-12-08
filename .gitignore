@@ -1,0 +1,6 @@
+**/*.pyc
+build/*
+sample.sql
+libpg_query*
+*.c
+*.so
