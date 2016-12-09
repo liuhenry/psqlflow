@@ -40,5 +40,15 @@ if USE_CYTHON:
     from Cython.Build import cythonize
     extensions = cythonize(extensions)
 
-setup(cmdclass={'build_ext': PSqlParseBuildExt},
+setup(name='psqlflow',
+      version='0.1.0',
+      description='',
+      author='Henry Liu',
+      author_email='henry@liuhenry.com',
+      packages=['psqlflow', 'psqlflow.parser', 'psqlflow.printers'],
+      entry_points={
+          'console_scripts': ['psqlflow=psqlflow.cli:main'],
+      },
+      install_requires=['six', 'pygraphviz'],
+      cmdclass={'build_ext': PSqlParseBuildExt},
       ext_modules=extensions)

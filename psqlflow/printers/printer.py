@@ -12,7 +12,8 @@ class Printer(object):
     def global_flows(self):
         obj = self.new_obj()
         for in_table in sorted(self.without_schema_exclusions(self.ast.inputs)):
-            for out_table in self.without_schema_exclusions(self.ast.trace_input_table(table).intersection(self.ast.outputs)):
+            downstream_tables = self.ast.trace_input_table(in_table).intersection(self.ast.outputs)
+            for out_table in self.without_schema_exclusions(downstream_tables):
                 self.add_edge(obj, in_table, out_table)
         return obj
 
