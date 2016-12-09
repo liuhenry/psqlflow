@@ -1,3 +1,4 @@
+# From https://github.com/alculquicondor/psqlparse/blob/master/psqlparse/parser.pyx
 import json
 import six
 from .exceptions import PSqlParseError
