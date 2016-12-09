@@ -1,12 +1,12 @@
-import sys
+import argparse
 from ast import AST
-from printers import LogPrinter
+from printers import JsonPrinter, GraphPrinter
 
 
 query = open(sys.argv[1]).read()
 graph = AST(query)
 
-output = LogPrinter(graph, global_schema_exclusions=['workers'])
-output.print_statement_flows()
-output.print_io()
-output.print_global_flows()
+output = GraphPrinter(graph, global_schema_exclusions=['workers'])
+g = output.statement_flows()
+g.layout(prog='dot')
+g.draw('output.png')

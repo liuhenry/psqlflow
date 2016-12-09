@@ -1,5 +1,5 @@
-from parser import parse
-from utils import infer_qualified_name
+from .parser import parse
+from .utils import infer_qualified_name
 
 
 def _get_node_type(node):
@@ -42,10 +42,10 @@ class AST(object):
         descendent_tables = set()
         for flow in self.flows:
             if name in flow['input']:
-                if name in self.outputs:
-                    descendent_tables.add(flow['output'])
-                else:
-                    child_tables.add(flow['output'])
+                # if name in self.outputs:
+                #     descendent_tables.add(flow['output'])
+                # else:
+                child_tables.add(flow['output'])
         for name in child_tables:
             for table in self.trace_input_table(name):
                 descendent_tables.add(table)
@@ -66,7 +66,7 @@ class AST(object):
         method = 'visit_' + node_type
         visitor = getattr(self, method, None)
         if visitor is None:
-            return self.generic_visit(node_type, node[node_type])
+            return self.generic_visit(node_type, node_actual)
         else:
             return visitor(node[node_type])
 
@@ -95,8 +95,9 @@ class AST(object):
 
     def generic_visit(self, node_type, node):
         """Called if no explicit visitor function exists for a node."""
-        print "Generic visit:", node_type
+        # print "Generic visit:", node_type
         # print node
+        pass
 
     def visit_String(self, node_actual):
         """Leaf Node"""
