@@ -42,11 +42,11 @@ Shows how the input tables flow to the output tables
 ```
 psqlflow exec_dash.sql -o global_graph.png
 ```
-![Global Graph](https://liuhenry.github.io/psqlflow/assets/images/global_graph.png)
+![Global Graph](../gh-pages/assets/images/global_graph.png?raw=true "Global Graph")
 
 ### Trace Graph
 Shows a complete flow of all tables, including temporary and intermediate tables dropped at the end of the query
 ```
 psqlflow exec_dash.sql -t -o trace_graph.png
 ```
-![Trace Graph](https://liuhenry.github.io/psqlflow/assets/images/trace_graph.png)
+![Trace Graph](../gh-pages/assets/images/trace_graph.png?raw=true "Trace Graph")
