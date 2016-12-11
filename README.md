@@ -17,6 +17,36 @@ python setup.py install
 ```
 
 ## Usage
+Given a sample job:
+```SQL
+CREATE TABLE IF NOT EXISTS analytics.users_computed AS (
+    SELECT *
+    FROM application.users
+    LEFT JOIN application.friends USING (user_id)
+);
+
+CREATE TABLE IF NOT EXISTS workers.activities_computed AS (
+    SELECT *
+    FROM application.activities
+    JOIN application.activity_logs USING (activity_id)
+);
+
+INSERT INTO analytics.dashboard (
+    SELECT *
+    FROM analytics.users_computed
+    JOIN workers.activities_computed USING (user_id)
+);
+```
+### Global Graph
+Shows how the input tables flow to the output tables
 ```
 psqlflow exec_dash.sql -o global_graph.png
 ```
+![Global Graph](https://liuhenry.github.io/psqlflow/assets/images/global_graph.png)
+
+### Trace Graph
+Shows a complete flow of all tables, including temporary and intermediate tables dropped at the end of the query
+```
+psqlflow exec_dash.sql -t -o trace_graph.png
+```
+![Trace Graph](https://liuhenry.github.io/psqlflow/assets/images/trace_graph.png)
